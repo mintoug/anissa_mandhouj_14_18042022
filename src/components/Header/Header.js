@@ -10,8 +10,8 @@ export default function Header() {
    <>
        <h1>HRnet</h1>
     <nav >
-        <NavLink to="/" > Create New</NavLink>
-        <NavLink to="/employee-list">Employees list</NavLink>
+        <NavLink to="/" > Create Emplyee</NavLink>
+        <NavLink to="/employee-list">View Employees</NavLink>
     
     </nav>
     </> 

@@ -1,10 +1,14 @@
-import React from 'react';
+import { EmployeeTable } from '../components/employeeTable/EmployeeTable';
 
+
+/**
+ * Render Employee List Page
+ * @returns {JSX}
+ */
 export const EmployeeList = () => {
-    return (
-        <div>
-        Hello list
-        </div>
-    );
-}
+  return (
 
+      <EmployeeTable />
+    
+  );
+};

@@ -1,10 +1,9 @@
-import { Label } from './Label';
+import { Label } from '../Label/Label';
 
 export const InputField = ({
     input,
     label,
     register,
-    required,
     pattern,
     type,
     placeholder,
@@ -16,8 +15,8 @@ export const InputField = ({
           type={type}
           placeholder={placeholder}
           {...register(input, {
-            required,
             pattern: pattern,
+           
           })}
         />
       
