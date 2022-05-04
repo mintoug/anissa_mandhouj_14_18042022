@@ -1,6 +1,6 @@
-// import { Controller } from 'react-hook-form';
-// import ReactSelect from 'react-select';
-// import { Label } from '../Label/Label';
+import { Controller } from 'react-hook-form';
+import ReactSelect from 'react-select';
+import { Label } from '../Label/Label';
 
 /**
  * Render Form Select Field
@@ -16,17 +16,17 @@ export const SelectField = ({
   label,
   control,
   options,
-  placeholder,
-  field
+  placeholder
+  
 }) => {
+ 
   return (
-    <div>
-      {/* <Label>{label}</Label>
+    <div style={{display:'flex', alignItems:'end'}} >
+      <Label>{label}</Label>
       <Controller
         name={input}
         control={control}
-        
-        render={({ field, fieldState: { error } }) => (
+        render={({ field}) => (
           <>
             <ReactSelect
               isClearable
@@ -37,19 +37,7 @@ export const SelectField = ({
            
           </>
         )}
-      /> */}
-      <label htmlFor={label}>{label}</label>
-        <select {...field}>
-        {options.map((element) => (
-                        <option
-                            key={`element-${element.value}`}
-                            value={element.value}
-                            
-                        >
-                            {element.label}
-                        </option>
-                    ))}
-      </select>
+      />
     </div>
   );
 };

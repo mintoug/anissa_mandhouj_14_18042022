@@ -9,10 +9,13 @@ export default function BasicDatePicker(props) {
    
     <div >
         <label>{props.label}</label>
-         <input type="date"  onChange={e => {
+         <input 
+         type="date" 
+         id="date"
+          onChange={e => {
                 props.onChange(e.target.value);
               }}
-              value={props.value}
+          value={props.value}
          ></input>
     </div>
   );

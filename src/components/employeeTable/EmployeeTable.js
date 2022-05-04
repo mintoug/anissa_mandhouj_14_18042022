@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getComparator } from '../sortTable/SortTable';
-import { TableHeader } from '../tableHeader/TableHeader';
+import {TableHeader} from '../tableHeader/TableHeader';
 import { SearchBar } from '../searchField/SearchField';
 
 //material ui
@@ -30,7 +30,7 @@ export const EmployeeTable = () => {
       startDate: employee.startDate,
       street: employee.street,
       city: employee.city,
-      state: employee.state.value,
+      // state: employee.state.label,
       zipCode: employee.zipCode,
     };
   });
@@ -63,10 +63,9 @@ export const EmployeeTable = () => {
     setPage(newPage);
   };
 
-  /**
-   * Change the number of rows to display in the table
-   * @param {object} event
-   */
+  
+  //  Change the number of rows to display in the table
+   
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -78,6 +77,7 @@ export const EmployeeTable = () => {
    * @param {string} searchedVal
    */
   const requestSearch = searchedVal => {
+    
     const filteredRows = originalEmployeesRows.filter(row => {
       return [
         row.firstName,
@@ -86,11 +86,11 @@ export const EmployeeTable = () => {
         row.street,
         row.city,
         row.state,
-        row.zipCode,
-      ].some(text => {
-        const [formattedText, formattedSearch] = [
-          text.trim().toLowerCase(),
-          searchedVal.trim().toLowerCase(),
+        row.zipCode
+      ]
+      .some( text => {
+        const [formattedText, formattedSearch] = [text.trim().toLowerCase(),
+          searchedVal.trim().toLowerCase()
         ];
 
         return formattedText.includes(formattedSearch);
@@ -107,7 +107,7 @@ export const EmployeeTable = () => {
     <>
       <SearchBar requestSearch={requestSearch} />
       <TableContainer>
-        <Table  aria-labelledby="tableTitle">
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <TableHeader
             order={order}
             orderBy={orderBy}

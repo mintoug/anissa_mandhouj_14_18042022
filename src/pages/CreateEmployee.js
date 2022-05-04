@@ -3,12 +3,7 @@ import {Modal} from 'anissa_p14_modal'
 import { useState } from 'react';
 
 
-
-/**
- * Renders Employee Creation Page
- * @returns {JSX}
- */
- export const CreateEmployee = () => {
+export const CreateEmployee = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
   
     return (
@@ -17,7 +12,7 @@ import { useState } from 'react';
           show={modalIsOpen}
           setShow={setModalIsOpen}
         
-          text="The new employee has been created"
+          text="Employee has been created!"
         
         />
         <EmployeeForm setModalIsOpen={setModalIsOpen} />

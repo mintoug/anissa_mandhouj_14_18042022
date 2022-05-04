@@ -18,9 +18,8 @@ export const SearchBar = ({ requestSearch }) => {
   return (
     <form onChange={handleInputChange}>
     <InputField
-        input={search}
-        type="text"
-        name="search"
+        input='search'
+        type='search'
         placeholder='search'
         register={register}
         

@@ -3,7 +3,7 @@ import { InputField } from '../form/inputField/InputField'
 import { useForm } from 'react-hook-form';
 import {states} from '../../assets/data/states'
 import {departments} from '../../assets/data/departments'
-import BasicDatePicker from '../form/datePickerField/DatePickerField';
+import  BasicDatePicker from '../form/datePickerField/DatePickerField';
 import {SelectField} from '../form/selectFieled/SelectFieled';
 import './EmployeeForm.css';
 
@@ -71,6 +71,7 @@ export const EmployeeForm = modalProps => {
             label="First Name"
             input="firstName"
             type="text"
+            control={control}
             placeholder="Enter the firstname"
             register={register}
           />
@@ -78,6 +79,7 @@ export const EmployeeForm = modalProps => {
             label="Last Name"
             input="lastName"
             type="text"
+            control={control}
             placeholder="Enter the lastname"
             register={register}
            
@@ -87,7 +89,7 @@ export const EmployeeForm = modalProps => {
             label={'Date of birth'}
             input={'birthdate'}
             placeholder={'dd/mm/yyyy'}
-            control={control}
+            
             birthdateValue={getValues('birthdate')}
         
           />
@@ -98,6 +100,7 @@ export const EmployeeForm = modalProps => {
             label="Street"
             input="street"
             type="text"
+            control={control}
             placeholder="Enter the street"
             register={register}
         
@@ -106,6 +109,7 @@ export const EmployeeForm = modalProps => {
             label="City"
             input="city"
             type="text"
+            control={control}
             placeholder="Enter the city"
             register={register}
            
@@ -113,14 +117,16 @@ export const EmployeeForm = modalProps => {
           <SelectField
             label={'State'}
             input={'state'}
-            placeholder="Select state"
             control={control}
+            placeholder="Select state"
             options={states}
+            
          />
           <InputField
             label="ZipCode"
             input="zipCode"
-            type="text"
+            type="number"
+            control={control}
             placeholder="Enter zipcode"
             register={register}
                      
