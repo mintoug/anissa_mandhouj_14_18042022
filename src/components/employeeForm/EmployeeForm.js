@@ -1,134 +1,121 @@
-import {useState, useEffect} from 'react'
+import { useState, useContext} from 'react'
 import { InputField } from '../form/inputField/InputField'
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import {states} from '../../assets/data/states'
 import {departments} from '../../assets/data/departments'
 import  BasicDatePicker from '../form/datePickerField/DatePickerField';
-import {SelectField} from '../form/selectFieled/SelectFieled';
+import SelectField from '../form/selectFieled/SelectFieled';
 import './EmployeeForm.css';
+import { EmployeeContext } from '../employeeContext';
+
 
 export const EmployeeForm = modalProps => {
-    const [employees, setEmployees] = useState([]);
-    useEffect(() => {
-      setEmployees(JSON.parse(localStorage.getItem('employees')) ?? []);
-    }, []);
-  
+       
     const { setModalIsOpen } = modalProps;
   
-    const [employee, setEmployee] = useState({
-      firstName: '',
-      lastName: '',
-      birthdate: '',
-      startDate: '',
-      department: '',
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-    });
-  
-    const {
-      register,
-      handleSubmit,
-      control,
-      getValues,
-      reset,
-    } = useForm({
-      defaultValues: employee,
-    });
-    /**
-     * Save employee information to state
-     */
-    const SaveEmployee = () => {
-      setEmployee({
-        firstName: getValues('firstName'),
-        lastName: getValues('lastName'),
-        birthdate: getValues('birthdate'),
-        startDate: getValues('startDate'),
-        department: getValues('department'),
-        street: getValues('street'),
-        city: getValues('city'),
-        state: getValues('state'),
-        zipCode: getValues('zipCode'),
-      });
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [birthDate,setBirthDate] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [department, setDepartment] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [stateLong, setStateLong] = useState(states[0].label);
+    const [zipCode, setZipCode] = useState('');
+
+    const id = Date.now().toString();
+
+    const refreshForm = () => {
+      setName("");
+      setLastName("");
+      setStreet("");
+      setCity("");
+      setStateLong(states[0].label);
+      setZipCode("");
+      setDepartment(departments[0].label);
+      // we do not set birthDate and startDate on today: we can't change the value of input, so values would be !=
+    };
+    
+    const getStateAbbreviation = (stateLong) => {
+    const selectedState = states.find((element) => element.label === stateLong);
+      return selectedState.label;
     };
   
-    /**
-     * Update local storage with employee state
-     */
-    const onSubmit = () => {
+    const state = getStateAbbreviation(stateLong);
+    const { addEmployee } = useContext(EmployeeContext);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      //the order here is important ! The name is also important as employee object is used in Table
+      const employee = { name, lastName, startDate, department, birthDate, street, city, state, zipCode, id };
       setModalIsOpen(true);
-      employees.push(employee);
-      localStorage.setItem('employees', JSON.stringify(employees));
-  
-      reset();
+      refreshForm();
+      addEmployee(employee);
     };
-  
-    return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+    
+
+    
+return (
+      <form onSubmit={handleSubmit}>
         <div className='formWrapper'>
           <InputField
             label="First Name"
-            input="firstName"
+            id="name"
             type="text"
-            control={control}
+            value={name}
+            setInput={setName}
             placeholder="Enter the firstname"
-            register={register}
+           
           />
           <InputField
             label="Last Name"
-            input="lastName"
+            setInput={setLastName}
             type="text"
-            control={control}
             placeholder="Enter the lastname"
-            register={register}
-           
+            value={lastName}      
           />
           <BasicDatePicker
-            className = {'DateInput'}
-            label={'Date of birth'}
-            input={'birthdate'}
-            placeholder={'dd/mm/yyyy'}
             
-            birthdateValue={getValues('birthdate')}
-        
+            label='Date of birth'
+            setInput={setBirthDate}
+            placeholder='dd/mm/yyyy'
+            type='date'
+            value={birthDate}
           />
         </div>
         <h2>Adress</h2>
         <div className='formWrapper'>
           <InputField
             label="Street"
-            input="street"
+            setInput={setStreet}
             type="text"
-            control={control}
             placeholder="Enter the street"
-            register={register}
+            value={street}
         
           />
           <InputField
             label="City"
-            input="city"
+            setInput={setCity}
             type="text"
-            control={control}
             placeholder="Enter the city"
-            register={register}
+            value={city}
            
           />
           <SelectField
-            label={'State'}
-            input={'state'}
-            control={control}
+            label='State'
+            name='state'
+            setInput={setStateLong}
             placeholder="Select state"
-            options={states}
+            list={states}
+            value={stateLong}
             
          />
           <InputField
             label="ZipCode"
-            input="zipCode"
+            setInput={setZipCode}
             type="number"
-            control={control}
             placeholder="Enter zipcode"
-            register={register}
+            value={zipCode}
                      
           />
         </div>
@@ -136,27 +123,25 @@ export const EmployeeForm = modalProps => {
         <h2>Department</h2>
         <div className='formWrapper'>
           <SelectField
-            label={'Department'}
-            input={'department'}
+            label='Department'
+            name='department'
+            list={departments}
+            setInput={setDepartment}
             placeholder="Select department"
-            control={control}
-            options = {departments }
+            value ={department}
           />
           <BasicDatePicker
-            className = {'DateInput'}
-            label={'Start Date'}
-            input={'startDate'}
-            control={control}
-            placeholder={'dd/mm/yyyy'}
-          
+            label='startDate'
+            setInput={setStartDate}
+            type ="date"
+            placeholder='dd/mm/yyyy'
+            value={startDate}
           />
         </div>
   
         <button
           type="submit"
-          onClick={() => {
-            SaveEmployee();
-          }}>
+          >
           Save
         </button>
       </form>

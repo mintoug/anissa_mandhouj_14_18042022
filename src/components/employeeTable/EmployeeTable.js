@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { getComparator } from '../sortTable/SortTable';
 import {TableHeader} from '../tableHeader/TableHeader';
-import { SearchBar } from '../searchField/SearchField';
+import { SearchBar } from '../searchField/SearchField'
+
+import { EmployeeContext } from '../employeeContext';
+
 
 //material ui
 import Table from '@mui/material/Table';
@@ -11,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+
 const dayjs = require('dayjs');
 
 /**
@@ -19,18 +23,19 @@ const dayjs = require('dayjs');
  * @returns {JSX}
  */
 export const EmployeeTable = () => {
-  const employees = JSON.parse(localStorage.getItem('employees')) ?? [];
+   const {employees} = useContext(EmployeeContext);
 
-  const originalEmployeesRows = employees.map(employee => {
+  
+   const originalEmployeesRows = employees.map(employee => {
     return {
-      firstName: employee.firstName,
+      firstName: employee.name,
       lastName: employee.lastName,
       birthdate: employee.birthdate,
       department: employee.department.label,
       startDate: employee.startDate,
       street: employee.street,
       city: employee.city,
-      // state: employee.state.label,
+      state: employee.state.label,
       zipCode: employee.zipCode,
     };
   });
@@ -101,7 +106,7 @@ export const EmployeeTable = () => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employees.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
     <>
@@ -112,7 +117,7 @@ export const EmployeeTable = () => {
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
-            rowCount={employees.length}
+            rowCount={rows.length}
           />
           <TableBody>
             {rows
@@ -150,7 +155,7 @@ export const EmployeeTable = () => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={employees.length}
+        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -1,23 +1,18 @@
 import { Label } from '../Label/Label';
 
 export const InputField = ({
-    input,
-    label,
-    register,
-    pattern,
-    type,
-    placeholder,
+  label, id, type, value, setInput, pattern, placeholder
   }) => {
     return (
       <div>
-        <Label>{label}</Label>
+        <Label htmlFor={id} >{label}</Label>
         <input
+          id={id}
           type={type}
           placeholder={placeholder}
-          {...register(input, {
-            pattern: pattern,
-           
-          })}
+          onChange={(e) => setInput(e.target.value)}
+          pattern={pattern}
+          value= {value}
         />
       
       </div>

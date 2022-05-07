@@ -6,13 +6,14 @@ import {
   BrowserRouter,
   Routes,
   Route,
-} from "react-router-dom";;
+} from "react-router-dom";
+import { EmployeeProvider } from './components/employeeContext';
 
 
 
 function App() {
   return (
-  
+  <EmployeeProvider> 
    <BrowserRouter>
    <Header />
     <Routes>
@@ -21,6 +22,7 @@ function App() {
       <Route path="/employee-list" element={<EmployeeList />} />
     </Routes>
     </BrowserRouter> 
+  </EmployeeProvider>  
   );
 }
 

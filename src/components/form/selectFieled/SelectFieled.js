@@ -1,43 +1,24 @@
-import { Controller } from 'react-hook-form';
-import ReactSelect from 'react-select';
-import { Label } from '../Label/Label';
+import React from "react";
 
-/**
- * Render Form Select Field
- * @param {string} input
- * @param {string} label
- * @param {object} control
- * @param {object} options
-  * @param {string} placeholder
- * @returns {JSX}
- */
-export const SelectField = ({
-  input,
-  label,
-  control,
-  options,
-  placeholder
-  
-}) => {
- 
-  return (
-    <div style={{display:'flex', alignItems:'end'}} >
-      <Label>{label}</Label>
-      <Controller
-        name={input}
-        control={control}
-        render={({ field}) => (
-          <>
-            <ReactSelect
-              isClearable
-              {...field}
-              placeholder={placeholder}
-              options={options}
-            />
-           
-          </>
-        )}
-      />
-    </div>
-  );
-};
+
+ function SelectField({ label, name, list, value, setInput, actionOnChange }) {
+	const createOptionsState = () => {
+		return list.map((item, index) => {
+			return <option key={index}>{item.label}</option>;
+		});
+	};
+
+	return (
+		<React.Fragment>
+			<label htmlFor={name}>{label}</label>
+			<select id={name} name={name} value={value} onChange={(e) => {
+					setInput(parseInt(e.target.value));
+				
+				}}>
+				{createOptionsState()}
+			</select>
+		</React.Fragment>
+	);
+}
+
+export default SelectField
