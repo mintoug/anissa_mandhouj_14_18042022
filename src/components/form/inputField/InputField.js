@@ -1,7 +1,7 @@
 import { Label } from '../Label/Label';
 
 export const InputField = ({
-  label, type, value, setInput, placeholder
+  label, type, value, onChange, placeholder
   }) => {
     return (
       <div>
@@ -9,7 +9,7 @@ export const InputField = ({
         <input
           type={type}
           placeholder={placeholder}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={onChange}
           value= {value}
         />
       

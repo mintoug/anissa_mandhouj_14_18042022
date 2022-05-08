@@ -11,6 +11,8 @@ import { EmployeeContext } from '../employeeContext';
 export const EmployeeForm = modalProps => {
        
     const { setModalIsOpen } = modalProps;
+
+    const { addEmployee } = useContext(EmployeeContext);
   
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -42,7 +44,7 @@ export const EmployeeForm = modalProps => {
   
     const state = getStateLabel(stateLong);
     
-    const { addEmployee } = useContext(EmployeeContext);
+   
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -60,12 +62,12 @@ return (
             label="First Name"
             type="text"
             value={name}
-            setInput={setName}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter the firstname"
           />
           <InputField
             label="Last Name"
-            setInput={setLastName}
+            onChange={(e) => setLastName(e.target.value)}
             type="text"
             placeholder="Enter the lastname"
             value={lastName}      
@@ -83,14 +85,14 @@ return (
         <div className='formWrapper'>
           <InputField
             label="Street"
-            setInput={setStreet}
+            onChange={(e) => setStreet(e.target.value)}
             type="text"
             placeholder="Enter the street"
             value={street}
           />
           <InputField
             label="City"
-            setInput={setCity}
+            onChange={(e) => setCity(e.target.value)}
             type="text"
             placeholder="Enter the city"
             value={city}
@@ -98,15 +100,15 @@ return (
           <SelectField
             label='State'
             name='state'
-            setInput={setStateLong}
+            
             placeholder="Select state"
             list={states}
-            value={stateLong}
+            value={state}
             onChange={(e)=>setStateLong(e.target.value)}
          />
           <InputField
             label="ZipCode"
-            setInput={setZipCode}
+            onChange={(e) => setZipCode(e.target.value)}
             type="number"
             placeholder="Enter zipcode"
             value={zipCode}
@@ -121,7 +123,7 @@ return (
             name='department'
             list={departments}
             placeholder="Select department"
-            value={department.label}
+            value={department}
             onChange={(e) => 
               setDepartment(e.target.value)}
           />

@@ -1,7 +1,7 @@
-import { useState, useContext} from 'react';
+import React, { useState, useContext} from 'react';
 import { getComparator } from '../sortTable/SortTable';
 import {TableHeader} from '../tableHeader/TableHeader';
-import { SearchBar } from '../searchField/SearchField'
+import  SearchBar  from '../searchField/SearchField'
 
 import { EmployeeContext } from '../employeeContext';
 
@@ -31,21 +31,24 @@ export const EmployeeTable = () => {
       firstName: employee.name,
       lastName: employee.lastName,
       birthdate: employee.birthdate,
-      department: employee.department.label,
+      department: employee.department,
       startdate: employee.startdate,
       street: employee.street,
       city: employee.city,
-      state: employee.state.label,
+      state: employee.state,
       zipCode: employee.zipCode,
     };
   });
+
+
+  const [rows, setRows] = useState(originalEmployeesRows);
 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('firstName');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const [rows, setRows] = useState(originalEmployeesRows);
+  
 
   /**
    * Sort the list in ascending or descending order according to a property
@@ -76,13 +79,12 @@ export const EmployeeTable = () => {
     setPage(0);
   };
 
-  /**
+ /**
    * Filters the display of the list of employees in the table
    * when a new value is entered in the search bar
    * @param {string} searchedVal
    */
   const requestSearch = searchedVal => {
-    
     const filteredRows = originalEmployeesRows.filter(row => {
       return [
         row.firstName,
@@ -91,26 +93,22 @@ export const EmployeeTable = () => {
         row.street,
         row.city,
         row.state,
-        row.zipCode
-      ]
-      .some( text => {
-        const [formattedText, formattedSearch] = [text.trim().toLowerCase(),
-          searchedVal.trim().toLowerCase()
-        ];
+        row.zipCode,
+      ].some(text => {
+        const [formattedText, formattedSearch] = [text.trim().toLowerCase(),  searchedVal.trim().toLowerCase() ];
 
         return formattedText.includes(formattedSearch);
       });
     });
     setRows(filteredRows);
   };
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
     <>
-      <SearchBar requestSearch={requestSearch} />
+      <SearchBar requestSearch={requestSearch}  />
       <TableContainer>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <TableHeader

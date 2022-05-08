@@ -1,4 +1,3 @@
-import { useForm } from 'react-hook-form';
 import { InputField } from '../form/inputField/InputField';
 import search from '../../assets/images/lens.svg';
 
@@ -8,11 +7,11 @@ import search from '../../assets/images/lens.svg';
  * @param {function} requestSearch
  * @returns {JSX}
  */
-export const SearchBar = ({ requestSearch }) => {
-  const { register, getValues } = useForm();
+  export default function SearchBar  ({ requestSearch })  {
+  
 
-  const handleInputChange = () => {
-    requestSearch(getValues('search'));
+  const handleInputChange = (e) => {
+    requestSearch(e.target.value);
   };
 
   return (
@@ -20,8 +19,7 @@ export const SearchBar = ({ requestSearch }) => {
     <InputField
         input='search'
         type='search'
-        placeholder='search'
-        register={register}
+        placeholder='search' 
         
         />
       <img src={search} alt="" />
