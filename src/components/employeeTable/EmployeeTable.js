@@ -32,7 +32,7 @@ export const EmployeeTable = () => {
       lastName: employee.lastName,
       birthdate: employee.birthdate,
       department: employee.department.label,
-      startDate: employee.startDate,
+      startdate: employee.startdate,
       street: employee.street,
       city: employee.city,
       state: employee.state.label,
@@ -135,7 +135,7 @@ export const EmployeeTable = () => {
                     </TableCell>
                     <TableCell>{row.department}</TableCell>
                     <TableCell>
-                      {dayjs(row.startDate).format('DD/MM/YYYY')}
+                      {dayjs(row.startdate).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell>{row.street}</TableCell>
                     <TableCell>{row.city}</TableCell>

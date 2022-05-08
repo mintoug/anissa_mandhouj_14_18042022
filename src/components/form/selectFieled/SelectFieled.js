@@ -1,20 +1,17 @@
 import React from "react";
 
 
- function SelectField({ label, name, list, value, setInput, actionOnChange }) {
+ function SelectField(props) {
 	const createOptionsState = () => {
-		return list.map((item, index) => {
-			return <option key={index}>{item.label}</option>;
+		return props.list.map((item, index) => {
+			return <option key={index} value={item.label}>{item.label}</option>;
 		});
 	};
 
 	return (
 		<React.Fragment>
-			<label htmlFor={name}>{label}</label>
-			<select id={name} name={name} value={value} onChange={(e) => {
-					setInput(parseInt(e.target.value));
-				
-				}}>
+			<label htmlFor={props.name}>{props.label}</label>
+			<select  name={props.name}  onChange={props.onChange}>
 				{createOptionsState()}
 			</select>
 		</React.Fragment>

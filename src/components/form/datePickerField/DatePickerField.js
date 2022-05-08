@@ -2,19 +2,20 @@ import * as React from 'react';
 
 
 
-export default function BasicDatePicker(type, id ,label,setInput,value) {
+export default function BasicDatePicker(props) {
 
 
   return (
    
     <div >
-        <label>{label}</label>
+        <label>{props.label}</label>
          <input 
-         type={"date" }
-         id={"date"}
-         onChange={(e) => setInput(e.target.value)}
-          value={value}
+        type={props.type}
+         
+        onChange={props.onChange}
          ></input>
     </div>
   );
 }
+
+;
