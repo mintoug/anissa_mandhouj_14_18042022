@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/p14/static/css/main.5f519298.css",
+    "main.js": "/p14/static/js/main.28b3b155.js",
+    "index.html": "/p14/index.html",
+    "static/media/lens.svg": "/p14/static/media/lens.d5a90ae7b94c4c6cea11a84271a47a4d.svg",
+    "main.5f519298.css.map": "/p14/static/css/main.5f519298.css.map",
+    "main.28b3b155.js.map": "/p14/static/js/main.28b3b155.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f519298.css",
+    "static/js/main.28b3b155.js"
+  ]
+}
